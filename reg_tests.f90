@@ -26,7 +26,7 @@ program driver
 
   !------- Internals ---------
 
-  ! test 1: GE_BS with nonsingular matrix
+  ! test 1: GESPP_BS with nonsingular matrix
   print *, '  '
   call random_number(A)
   call random_number(xtrue)
@@ -34,11 +34,11 @@ program driver
      A(i,i) = A(i,i) + 10.d0
   end do
   b = matmul(A,xtrue)
-  call GE_BS(A, x, b, 10, ierr)
-  print *, 'GE_BS on nonsingular problem returned ierr =',ierr
+  call GESPP_BS(A, x, b, 10, ierr)
+  print *, 'GESPP_BS on nonsingular problem returned ierr =',ierr
   print *, '   ||x-xtrue||_inf =',maxval(abs(x-xtrue))
 
-  ! test 2: GE_BS with nonsingular matrix requiring pivoting
+  ! test 2: GESPP_BS with nonsingular matrix requiring pivoting
   print *, '  '
   call random_number(A)
   call random_number(xtrue)
@@ -50,11 +50,11 @@ program driver
   A(1,1) = 0.d0
   A(2,2) = 0.d0
   b = matmul(A,xtrue)
-  call GE_BS(A, x, b, 10, ierr)
-  print *, 'GE_BS on nonsingular problem requiring pivoting returned ierr =',ierr
+  call GESPP_BS(A, x, b, 10, ierr)
+  print *, 'GESPP_BS on nonsingular problem requiring pivoting returned ierr =',ierr
   print *, '   ||x-xtrue||_inf =',maxval(abs(x-xtrue))
 
-  ! test 3: GE_BS with singular
+  ! test 3: GESPP_BS with singular
   print *, '  '
   call random_number(A)
   call random_number(xtrue)
@@ -64,8 +64,8 @@ program driver
   A(1,2) = 10.d0
   A(:,9) = A(:,3)
   b = matmul(A,xtrue)
-  call GE_BS(A, x, b, 10, ierr)
-  print *, 'GE_BS on singular problem returned ierr =',ierr
+  call GESPP_BS(A, x, b, 10, ierr)
+  print *, 'GESPP_BS on singular problem returned ierr =',ierr
   print *, '   ||x-xtrue||_inf =',maxval(abs(x-xtrue))
 
   ! test 4: F_IRK test
